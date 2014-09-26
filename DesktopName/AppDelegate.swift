@@ -14,15 +14,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var timer : NSTimer!
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        
-        setSpaceChangeCallback(spaceChanged)
-        
-        
         let statusBar = NSStatusBar.systemStatusBar()
         statusItem = statusBar.statusItemWithLength(49)
+        statusItem.menu = menu()
         
         let current = tsapi_currentSpaceNumberOnDisplay(0);
         setTitle(nameForSpace(current))
+        
+        setSpaceChangeCallback(spaceChanged)
         
         timer = NSTimer(timeInterval: 2, target: self, selector: "watchdog:", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
@@ -59,5 +58,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let space = tsapi_currentSpaceNumberOnDisplay(0)
         setTitle(nameForSpace(space))
     }
+    
+    func menu() -> NSMenu {
+        let menu = NSMenu(title: "DesktopName")
+        menu.addItem(quitMenuItem())
+        return menu
+    }
+    
+    func quitMenuItem() -> NSMenuItem {
+        let mi = NSMenuItem()
+        mi.title = NSLocalizedString("Quit", comment: "Quit menu")
+        mi.action = "quit:"
+        mi.target = self
+        return mi;
+    }
+    
+    func quit(sender : AnyObject?) {
+        NSApplication.sharedApplication().terminate(self)
+    }
+
 }
 

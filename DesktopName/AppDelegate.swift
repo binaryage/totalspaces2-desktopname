@@ -48,7 +48,8 @@ import Cocoa
     func setTitle(_ name : String) {
         let font = NSFont(name: "Helvetica-Light", size: 9)
         let attrs : [String : Any] = [
-            NSFontAttributeName : font as Any
+            NSFontAttributeName : font as Any,
+            NSBaselineOffsetAttributeName : -1.5
         ]
         let str = NSAttributedString(string: name, attributes: attrs)
         statusItem.attributedTitle = str

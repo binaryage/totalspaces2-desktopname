@@ -8,14 +8,14 @@
 
 import Cocoa
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+@NSApplicationMain class AppDelegate: NSObject, NSApplicationDelegate {
 
     var statusItem : NSStatusItem!
-    var timer : NSTimer!
+    var timer : Timer!
 
-    func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        let statusBar = NSStatusBar.systemStatusBar()
-        statusItem = statusBar.statusItemWithLength(49)
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let statusBar = NSStatusBar.system()
+        statusItem = statusBar.statusItem(withLength: 49)
         statusItem.menu = menu()
         
         let current = tsapi_currentSpaceNumberOnDisplay(0);
@@ -23,38 +23,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         setSpaceChangeCallback(spaceChanged)
         
-        timer = NSTimer(timeInterval: 2, target: self, selector: "watchdog:", userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+        timer = Timer(timeInterval: 2, target: self, selector: #selector(AppDelegate.watchdog(_:)), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: RunLoopMode.commonModes)
     }
 
-    func nameForSpace(space: UInt32) -> String {
+    func nameForSpace(_ space: UInt32) -> String {
         let name = tsapi_spaceNameForSpaceNumberOnDisplay(space, 0)
-        let str = String.fromCString(UnsafePointer<CChar>(name))
 
-        tsapi_freeString(UnsafeMutablePointer<Int8>(name))
-        
-        if let s = str {
-            return s
-        } else {
-            return ""
-        }
+        guard name != nil
+            else {return ""}
+
+        let str = String(cString: UnsafePointer<CChar>(name!))
+
+        tsapi_freeString(UnsafeMutablePointer<Int8>(mutating: name))
+
+        return str
     }
     
-    func spaceChanged(from: UInt32, to: UInt32, display: UInt32) {
+    func spaceChanged(_ from: UInt32, to: UInt32, display: UInt32) {
 //        println("\(from) \(to)")
         setTitle(nameForSpace(to))
     }
     
-    func setTitle(name : String) {
+    func setTitle(_ name : String) {
         let font = NSFont(name: "Helvetica-Light", size: 9)
-        let attrs = [
-            NSFontAttributeName : font
+        let attrs : [String : Any] = [
+            NSFontAttributeName : font as Any
         ]
         let str = NSAttributedString(string: name, attributes: attrs)
         statusItem.attributedTitle = str
     }
     
-    func watchdog(timer : NSTimer) {
+    func watchdog(_ timer : Timer) {
         let space = tsapi_currentSpaceNumberOnDisplay(0)
         setTitle(nameForSpace(space))
     }
@@ -68,13 +68,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func quitMenuItem() -> NSMenuItem {
         let mi = NSMenuItem()
         mi.title = NSLocalizedString("Quit", comment: "Quit menu")
-        mi.action = "quit:"
+        mi.action = #selector(AppDelegate.quit(_:))
         mi.target = self
         return mi;
     }
     
-    func quit(sender : AnyObject?) {
-        NSApplication.sharedApplication().terminate(self)
+    func quit(_ sender : AnyObject?) {
+        NSApplication.shared().terminate(self)
     }
 
 }

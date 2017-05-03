@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0D373D19D42EB20003ADF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D373C19D42EB20003ADF5 /* main.swift */; };
 		3A0D373F19D42EB20003ADF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D373E19D42EB20003ADF5 /* AppDelegate.swift */; };
 		3A0D374119D42EB20003ADF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0D374019D42EB20003ADF5 /* Images.xcassets */; };
 		3A0D374419D42EB20003ADF5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0D374219D42EB20003ADF5 /* MainMenu.xib */; };
@@ -43,7 +42,6 @@
 /* Begin PBXFileReference section */
 		3A0D373719D42EB20003ADF5 /* DesktopName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesktopName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0D373B19D42EB20003ADF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A0D373C19D42EB20003ADF5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3A0D373E19D42EB20003ADF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A0D374019D42EB20003ADF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3A0D374319D42EB20003ADF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 				3A0D376219D433D30003ADF5 /* libtotalspaces2api.dylib */,
 				3A0D375B19D42FBA0003ADF5 /* TSLib.h */,
 				3A0D373B19D42EB20003ADF5 /* Info.plist */,
-				3A0D373C19D42EB20003ADF5 /* main.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -186,9 +183,11 @@
 				TargetAttributes = {
 					3A0D373619D42EB20003ADF5 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0830;
 					};
 					3A0D374819D42EB20003ADF5 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = 3A0D373619D42EB20003ADF5;
 					};
 				};
@@ -238,7 +237,6 @@
 			files = (
 				3A998F1F19D45A8D007E2E00 /* TSLibGlue.m in Sources */,
 				3A0D373F19D42EB20003ADF5 /* AppDelegate.swift in Sources */,
-				3A0D373D19D42EB20003ADF5 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +361,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = DesktopName/CBridging.h;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -380,6 +379,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = DesktopName/CBridging.h;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -399,6 +399,7 @@
 				INFOPLIST_FILE = DesktopNameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesktopName.app/Contents/MacOS/DesktopName";
 			};
 			name = Debug;
@@ -415,6 +416,7 @@
 				INFOPLIST_FILE = DesktopNameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesktopName.app/Contents/MacOS/DesktopName";
 			};
 			name = Release;
